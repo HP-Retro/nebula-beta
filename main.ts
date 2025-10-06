@@ -216,14 +216,20 @@ info.onLifeZero(function () {
     game.gameOver(false)
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
-    sprites.destroy(myEnemy)
+    sprites.destroy(otherSprite, effects.ashes, 500)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    info.changeLifeBy(-1)
-    sprites.destroy(myEnemy)
+    LostSoul.startEffect(effects.hearts, 750)
+    if (isInvincible == false) {
+        info.changeLifeBy(-1)
+        isInvincible = true
+        timer.after(750, function () {
+            isInvincible = false
+        })
+    }
 })
 let projectile: Sprite = null
-let myEnemy: Sprite = null
+let isInvincible = false
 let LostSoul: Sprite = null
 scene.setBackgroundImage(img`
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
@@ -371,7 +377,80 @@ info.setLife(5)
 LostSoul.ay = 400
 LostSoul.setVelocity(0, 90)
 scene.cameraFollowSprite(LostSoul)
-myEnemy = sprites.create(img`
+isInvincible = false
+let mySprite = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . 7 7 7 7 . . . . . . 
+    . . . . . 7 7 7 7 7 7 . . . . . 
+    . . . . 7 f f 7 f f 7 7 . . . . 
+    . . . . 7 f f 7 f f 7 7 . . . . 
+    . . . . 7 7 7 7 7 7 7 7 . . . . 
+    . . . . . 7 7 7 f f 7 . . . . . 
+    . . . . . . 7 7 7 7 . . . . . . 
+    . . . f f f 7 7 7 7 f f f . . . 
+    . . . f f f 7 7 7 7 f f f . . . 
+    . . . 9 9 9 7 7 7 7 9 9 9 . . . 
+    . . . 9 9 9 7 7 7 7 9 9 9 . . . 
+    . . . . 9 . 7 7 7 7 . 9 . . . . 
+    . . . . 9 . 7 7 7 7 . 9 . . . . 
+    . . . . . . 7 7 7 7 . . . . . . 
+    `, SpriteKind.Enemy)
+let gleep_zorp = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . 7 7 7 7 . . . . . . 
+    . . . . . 7 7 7 7 7 7 . . . . . 
+    . . . . 7 f f 7 f f 7 7 . . . . 
+    . . . . 7 f f 7 f f 7 7 . . . . 
+    . . . . 7 7 7 7 7 7 7 7 . . . . 
+    . . . . . 7 7 7 f f 7 . . . . . 
+    . . . . . . 7 7 7 7 . . . . . . 
+    . . . f f f 7 7 7 7 f f f . . . 
+    . . . f f f 7 7 7 7 f f f . . . 
+    . . . 9 9 9 7 7 7 7 9 9 9 . . . 
+    . . . 9 9 9 7 7 7 7 9 9 9 . . . 
+    . . . . 9 . 7 7 7 7 . 9 . . . . 
+    . . . . 9 . 7 7 7 7 . 9 . . . . 
+    . . . . . . 7 7 7 7 . . . . . . 
+    `, SpriteKind.Enemy)
+let rizz = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . 7 7 7 7 . . . . . . 
+    . . . . . 7 7 7 7 7 7 . . . . . 
+    . . . . 7 f f 7 f f 7 7 . . . . 
+    . . . . 7 f f 7 f f 7 7 . . . . 
+    . . . . 7 7 7 7 7 7 7 7 . . . . 
+    . . . . . 7 7 7 f f 7 . . . . . 
+    . . . . . . 7 7 7 7 . . . . . . 
+    . . . f f f 7 7 7 7 f f f . . . 
+    . . . f f f 7 7 7 7 f f f . . . 
+    . . . 9 9 9 7 7 7 7 9 9 9 . . . 
+    . . . 9 9 9 7 7 7 7 9 9 9 . . . 
+    . . . . 9 . 7 7 7 7 . 9 . . . . 
+    . . . . 9 . 7 7 7 7 . 9 . . . . 
+    . . . . . . 7 7 7 7 . . . . . . 
+    `, SpriteKind.Enemy)
+let explode = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . 7 7 7 7 . . . . . . 
+    . . . . . 7 7 7 7 7 7 . . . . . 
+    . . . . 7 f f 7 f f 7 7 . . . . 
+    . . . . 7 f f 7 f f 7 7 . . . . 
+    . . . . 7 7 7 7 7 7 7 7 . . . . 
+    . . . . . 7 7 7 f f 7 . . . . . 
+    . . . . . . 7 7 7 7 . . . . . . 
+    . . . f f f 7 7 7 7 f f f . . . 
+    . . . f f f 7 7 7 7 f f f . . . 
+    . . . 9 9 9 7 7 7 7 9 9 9 . . . 
+    . . . 9 9 9 7 7 7 7 9 9 9 . . . 
+    . . . . 9 . 7 7 7 7 . 9 . . . . 
+    . . . . 9 . 7 7 7 7 . 9 . . . . 
+    . . . . . . 7 7 7 7 . . . . . . 
+    `, SpriteKind.Enemy)
+let enemy2 = sprites.create(img`
     . . . . . 9 9 9 9 9 9 . . . . . 
     . . . . 9 9 2 2 2 2 9 9 . . . . 
     . . . . 9 9 2 f 2 f 9 9 . . . . 
@@ -389,4 +468,69 @@ myEnemy = sprites.create(img`
     . . . . . 2 3 1 1 3 2 . . . . . 
     . . . . . 2 3 1 1 3 2 . . . . . 
     `, SpriteKind.Enemy)
+let enemy3 = sprites.create(img`
+    . . . . . 9 9 9 9 9 9 . . . . . 
+    . . . . 9 9 2 2 2 2 9 9 . . . . 
+    . . . . 9 9 2 f 2 f 9 9 . . . . 
+    . . . . 9 9 2 2 2 2 9 9 . . . . 
+    b b b b b b b b b b b b b b b b 
+    . b b b b b b b b b b b b b b . 
+    . . b b b b b b b b b b b b . . 
+    . . . . . b b b b b b . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    `, SpriteKind.Enemy)
+let enemyiv = sprites.create(img`
+    . . . . . 9 9 9 9 9 9 . . . . . 
+    . . . . 9 9 2 2 2 2 9 9 . . . . 
+    . . . . 9 9 2 f 2 f 9 9 . . . . 
+    . . . . 9 9 2 2 2 2 9 9 . . . . 
+    b b b b b b b b b b b b b b b b 
+    . b b b b b b b b b b b b b b . 
+    . . b b b b b b b b b b b b . . 
+    . . . . . b b b b b b . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    `, SpriteKind.Enemy)
+let myEnemy = sprites.create(img`
+    . . . . . 9 9 9 9 9 9 . . . . . 
+    . . . . 9 9 2 2 2 2 9 9 . . . . 
+    . . . . 9 9 2 f 2 f 9 9 . . . . 
+    . . . . 9 9 2 2 2 2 9 9 . . . . 
+    b b b b b b b b b b b b b b b b 
+    . b b b b b b b b b b b b b b . 
+    . . b b b b b b b b b b b b . . 
+    . . . . . b b b b b b . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    . . . . . 2 3 1 1 3 2 . . . . . 
+    `, SpriteKind.Enemy)
+tiles.placeOnTile(enemyiv, tiles.getTileLocation(65, 4))
 tiles.placeOnTile(myEnemy, tiles.getTileLocation(83, 4))
+tiles.placeOnTile(enemy3, tiles.getTileLocation(22, 8))
+tiles.placeOnTile(enemy2, tiles.getTileLocation(35, 11))
+tiles.placeOnTile(mySprite, tiles.getTileLocation(41, 7))
+tiles.placeOnTile(explode, tiles.getTileLocation(8, 11))
+tiles.placeOnTile(gleep_zorp, tiles.getTileLocation(36, 11))
+tiles.placeOnTile(rizz, tiles.getTileLocation(93, 3))
+mySprite.follow(LostSoul, 50)
+gleep_zorp.follow(LostSoul, 50)
+explode.follow(LostSoul, 50)
+rizz.follow(LostSoul, 50)
