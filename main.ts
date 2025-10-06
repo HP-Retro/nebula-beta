@@ -219,11 +219,11 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
     sprites.destroy(otherSprite, effects.ashes, 500)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    LostSoul.startEffect(effects.hearts, 750)
+    LostSoul.startEffect(effects.hearts, 1250)
     if (isInvincible == false) {
         info.changeLifeBy(-1)
         isInvincible = true
-        timer.after(750, function () {
+        timer.after(1250, function () {
             isInvincible = false
         })
     }
