@@ -219,7 +219,7 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
     sprites.destroy(otherSprite, effects.ashes, 500)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    LostSoul.startEffect(effects.hearts, 1250)
+    LostSoul.startEffect(effects.halo, 1250)
     if (isInvincible == false) {
         info.changeLifeBy(-1)
         isInvincible = true
@@ -534,3 +534,27 @@ mySprite.follow(LostSoul, 50)
 gleep_zorp.follow(LostSoul, 50)
 explode.follow(LostSoul, 50)
 rizz.follow(LostSoul, 50)
+forever(function () {
+    enemy3.setVelocity(50, 0)
+    pause(1000)
+    enemy3.setVelocity(-50, 0)
+    pause(1000)
+})
+forever(function () {
+    enemyiv.setVelocity(50, 0)
+    pause(1000)
+    enemyiv.setVelocity(-50, 0)
+    pause(1000)
+})
+forever(function () {
+    enemy2.setVelocity(50, 0)
+    pause(1000)
+    enemy2.setVelocity(-50, 0)
+    pause(1000)
+})
+forever(function () {
+    myEnemy.setVelocity(50, 0)
+    pause(1000)
+    myEnemy.setVelocity(-50, 0)
+    pause(1000)
+})
