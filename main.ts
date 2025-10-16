@@ -1,6 +1,3 @@
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile0`, function (sprite, location) {
-    game.gameOver(true)
-})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
     tiles.setCurrentTilemap(tilemap`level5`)
@@ -129,6 +126,12 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, l
     tiles.placeOnTile(LostSoul, tiles.getTileLocation(3, 16))
     game.showLongText("You Can't Be Here. Escape Fast.", DialogLayout.Bottom)
     info.startCountdown(120)
+    music.stopAllSounds()
+    music.play(music.createSong(hex`003c000408050303001c0001dc00690000045e010004000000000000000000000564000104000306008c00a000011908001c000e050046006603320000040a002d000000640014000132000201000221004c00540002192c6000680002192c74007c00021b2c7c008400011d84008c00011909010e02026400000403780000040a000301000000640001c80000040100000000640001640000040100000000fa0004af00000401c80000040a00019600000414000501006400140005010000002c0104dc00000401fa0000040a0001c8000004140005d0076400140005d0070000c800029001f40105c201f4010a0005900114001400039001000005c201f4010500058403050032000584030000fa00049001000005c201f4010500058403c80032000584030500640005840300009001049001000005c201f4010500058403c80064000584030500c8000584030000f40105ac0d000404a00f00000a0004ac0d2003010004a00f0000280004ac0d9001010004a00f0000280002d00700040408070f0064000408070000c80003c800c8000e7d00c80019000e64000f0032000e78000000fa00032c01c8000ee100c80019000ec8000f0032000edc000000fa0003f401c8000ea901c80019000e90010f0032000ea4010000fa0001c8000004014b000000c800012c01000401c8000000c8000190010004012c010000c80002c800000404c8000f0064000496000000c80002c2010004045e010f006400042c010000640002c409000404c4096400960004f6090000f40102b80b000404b80b64002c0104f40b0000f401022003000004200300040a000420030000ea01029001000004900100040a000490010000900102d007000410d0076400960010d0070000c800e7000000010001040400050001040800090001040c000d000104100011000104140015000502030405061800190001041c001d000104200021000104240025000c000102030405060708090a0b2800290001042c002d000502030405063000310001043400350001043800390001043c003d000104400041000104440045000502030405064800490001044c004d000c000102030405060708090a0b5000510001045400550001045800590001045c005d000104600061000104640065000205066800690001036c006d0002050670007100020306740075000106780079000202087c007d00020307`), music.PlaybackMode.LoopingInBackground)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`fire0`, function (sprite, location) {
+    sprites.destroy(LostSoul)
+    game.gameOver(false)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`homeportal1`, function (sprite, location) {
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
@@ -146,12 +149,12 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
             f . . . . . f f f f . . . . . f 
             f f . . . f f 8 8 f f . . . f f 
             f 8 f . f 8 8 8 8 8 8 f . f 8 f 
+            f 8 8 f 8 f 8 8 8 8 f 8 f 8 8 f 
+            f 8 8 f 8 8 f 8 8 f 8 8 f 8 8 f 
+            f 8 8 f 8 f 8 8 8 8 f 8 f 8 8 f 
             f 8 8 f 8 8 8 8 8 8 8 8 f 8 8 f 
-            f 8 8 f 8 1 9 8 8 9 1 8 f 8 8 f 
-            f 8 8 f 8 1 1 8 8 1 1 8 f 8 8 f 
-            f 8 8 f 8 8 8 8 8 8 8 8 f 8 8 f 
-            . f 8 f 8 8 8 f f 8 8 8 f 8 f . 
-            . . f f 8 8 f 8 8 f 8 8 f f . . 
+            . f 8 f 8 8 f f f f 8 8 f 8 f . 
+            . . f f 8 8 8 f f 8 8 8 f f . . 
             . . . f f 8 8 8 8 8 8 f f . . . 
             . . . . . f f f f f f . . . . . 
             . . . . . . . f f . . . . . . . 
@@ -163,12 +166,12 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
             . . . . . . f f f f . . . . . . 
             . . . . . f f 8 8 f f . . . . . 
             . . . . f 8 8 8 8 8 8 f . . . . 
-            . . f f 8 8 8 8 8 8 8 8 f f . . 
-            . f 8 f 8 1 1 8 8 1 1 8 f 8 f f 
-            f 8 8 f 8 1 9 8 8 9 1 8 f 8 8 f 
+            . . f f 8 f 8 8 8 8 f 8 f f . . 
+            . f 8 f 8 8 f 8 8 f 8 8 f 8 f f 
+            f 8 8 f 8 f 8 8 8 8 f 8 f 8 8 f 
             f 8 8 f 8 8 8 8 8 8 8 8 f 8 8 f 
-            f 8 8 f 8 8 8 f f 8 8 8 f 8 8 f 
-            f 8 f f 8 8 f 8 8 f 8 8 f f 8 f 
+            f 8 8 f 8 8 f f f f 8 8 f 8 8 f 
+            f 8 f f 8 8 8 f f 8 8 8 f f 8 f 
             f 8 f . f 8 8 8 8 8 8 f . f 8 f 
             f 8 f . . f f f f f f . . f 8 f 
             f f . . . . . f f . . . . . f f 
@@ -180,14 +183,14 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
             . . . . . . f f f f . . . . . . 
             . . . . . f f 8 8 f f . . . . . 
             . . . . f 8 8 8 8 8 8 f . . . . 
-            . . . f 8 8 8 8 8 8 8 8 f . . . 
-            . . . f 8 1 1 8 8 1 1 8 f . . . 
-            . . . f 8 1 9 8 8 9 1 8 f . . . 
-            . . . f 8 8 8 8 8 8 8 8 f . . . 
-            . . . f 8 8 8 f f 8 8 8 f . . . 
-            . . . f 8 8 f 8 8 f 8 8 f . . . 
-            . . . . f 8 8 8 8 8 8 f . . . . 
-            . . . . . f f f f f f . . . . . 
+            f f f f 8 8 8 8 8 8 8 8 f f f f 
+            f 8 8 f 8 1 1 8 8 1 1 8 f 8 8 f 
+            f 8 8 f 8 1 9 8 8 9 1 8 f 8 8 f 
+            f 8 8 f 8 8 8 8 8 8 8 8 f 8 8 f 
+            f 8 8 f 8 8 f 8 8 f 8 8 f 8 8 f 
+            f 8 f f 8 8 8 f f 8 8 8 f f 8 f 
+            f f . . f 8 8 8 8 8 8 f . . f f 
+            f . . . . f f f f f f . . . . f 
             . . . . . . . f f . . . . . . . 
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -195,6 +198,7 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         500,
         false
         )
+        music.play(music.melodyPlayable(music.knock), music.PlaybackMode.UntilDone)
     }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, location) {
@@ -205,7 +209,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, l
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (LostSoul.vx > 0) {
         for (let index = 0; index < 10; index++) {
-            LostSoul.x += 3
+            LostSoul.x += 6
             pause(5)
             LostSoul.setImage(img`
                 . . . . . . . . . . . . . . . . 
@@ -214,10 +218,10 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 8 8 . . . f f f f f f 8 . . . . 
                 . . . . f 8 8 8 8 8 8 f 8 . . . 
                 . . . f 8 8 f 1 8 8 8 8 f 8 . . 
-                . . f f 8 8 f 9 8 8 f 8 f 8 . . 
-                . . f 8 8 8 8 8 8 f 8 8 f f 8 . 
-                . . f 8 8 8 8 8 8 f 8 8 f f 8 . 
-                . . f f 8 8 f 9 8 8 f 8 f 8 . . 
+                . . f f 8 8 f 9 8 f 8 8 f 8 . . 
+                . . f 8 8 8 8 8 8 8 f 8 f f 8 . 
+                . . f 8 8 8 8 8 8 8 f 8 f f 8 . 
+                . . f f 8 8 f 9 8 f 8 8 f 8 . . 
                 . . . f 8 8 f 1 8 8 8 8 f 8 . . 
                 . . . . f 8 8 8 8 8 8 f 8 . . . 
                 8 8 . . . f f f f f f 8 . . . . 
@@ -233,10 +237,10 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 8 8 6 6 6 f f f f f f 8 6 . . . 
                 6 6 . . f 8 8 8 8 8 8 f 8 6 . . 
                 . . . f 8 8 f 1 8 8 8 8 f 8 6 . 
-                . . f f 8 8 f 9 8 8 f 8 f 8 6 . 
-                . . f 8 8 8 8 8 8 f 8 8 f f 8 6 
-                . . f 8 8 8 8 8 8 f 8 8 f f 8 6 
-                . . f f 8 8 f 9 8 8 f 8 f 8 6 . 
+                . . f f 8 8 f 9 8 f 8 8 f 8 6 . 
+                . . f 8 8 8 8 8 8 8 f 8 f f 8 6 
+                . . f 8 8 8 8 8 8 8 f 8 f f 8 6 
+                . . f f 8 8 f 9 8 f 8 8 f 8 6 . 
                 . . . f 8 8 f 1 8 8 8 8 f 8 6 . 
                 6 6 . . f 8 8 8 8 8 8 f 8 6 . . 
                 8 8 6 6 6 f f f f f f 8 6 . . . 
@@ -251,12 +255,12 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 6 6 8 8 8 8 8 8 8 8 8 6 9 . . . 
                 8 8 6 6 6 f f f f f f 8 6 9 . . 
                 6 6 9 9 f 8 8 8 8 8 8 f 8 6 9 . 
-                9 9 9 f 8 8 f 1 8 8 8 8 f 8 6 9 
-                9 9 f f 8 8 f 9 8 8 f 8 f 8 6 9 
-                9 9 f 8 8 8 8 8 8 f 8 8 f f 8 6 
-                9 9 f 8 8 8 8 8 8 f 8 8 f f 8 6 
-                9 9 f f 8 8 f 9 8 8 f 8 f 8 6 9 
-                9 9 9 f 8 8 f 1 8 8 8 8 f 8 6 9 
+                9 9 9 f 8 f 8 f 8 8 8 8 f 8 6 9 
+                9 9 f f 8 8 f 8 8 f 8 8 f 8 6 9 
+                9 9 f 8 8 8 8 8 8 8 f 8 f f 8 6 
+                9 9 f 8 8 8 8 8 8 8 f 8 f f 8 6 
+                9 9 f f 8 8 f 8 8 f 8 8 f 8 6 9 
+                9 9 9 f 8 f 8 f 8 8 8 8 f 8 6 9 
                 6 6 9 9 f 8 8 8 8 8 8 f 8 6 9 . 
                 8 8 6 6 6 f f f f f f 8 6 9 . . 
                 6 6 8 8 8 8 8 8 8 8 8 6 9 . . . 
@@ -265,6 +269,30 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 `)
         }
     }
+    if (info.life() < 4) {
+        LostSoul.setImage(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . f f f f . . . . . . 
+            . . . . . f f 8 8 f f . . . . . 
+            . . . . f 8 8 8 8 8 8 f . . . . 
+            . . . f 8 8 8 8 8 8 8 8 f . . . 
+            . . . f 8 f f 8 8 f f 8 f . . . 
+            . . . f 8 f 9 8 8 9 f 8 f . . . 
+            . . . f 8 8 8 8 8 8 8 8 f . . . 
+            . . . f 8 8 8 f f 8 8 8 f . . . 
+            . . . f 8 8 f 8 8 f 8 8 f . . . 
+            . . . . f 8 8 8 8 8 8 f . . . . 
+            . . . . . f f f f f f . . . . . 
+            . . . . . . . f f . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `)
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile15`, function (sprite, location) {
+    sprites.destroy(LostSoul)
+    game.gameOver(false)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile13`, function (sprite, location) {
     sprites.destroy(LostSoul)
@@ -290,15 +318,174 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, LostSoul, 100, 0)
+    music.play(music.createSoundEffect(WaveShape.Sine, 5000, 0, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+    if (info.life() < 4) {
+        LostSoul.setImage(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . f f f f . . . . . . 
+            . . . . . f f 8 8 f f . . . . . 
+            . . . . f 8 8 8 8 8 8 f . . . . 
+            . . . f 8 8 8 8 8 8 8 8 f . . . 
+            . . . f 8 f f 8 8 f f 8 f . . . 
+            . . . f 8 f 9 8 8 9 f 8 f . . . 
+            . . . f 8 8 8 8 8 8 8 8 f . . . 
+            . . . f 8 8 8 f f 8 8 8 f . . . 
+            . . . f 8 8 f 8 8 f 8 8 f . . . 
+            . . . . f 8 8 8 8 8 8 f . . . . 
+            . . . . . f f f f f f . . . . . 
+            . . . . . . . f f . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `)
+    }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, location) {
-    game.gameOver(true)
+    tiles.setCurrentTilemap(tilemap`level6`)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, location) {
     sprites.destroy(LostSoul)
     game.gameOver(false)
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`fire`, function (sprite, location) {
+    sprites.destroy(LostSoul)
+    game.gameOver(false)
+})
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    animation.runImageAnimation(
+    LostSoul,
+    [img`
+        . . . . . . . . . . . . . . . . 
+        . . . . f f f f . . . . . . . . 
+        . . . f f 8 8 f f . . . . . . . 
+        . . f 8 8 8 8 8 8 f . . . . . . 
+        . f 8 8 8 8 8 8 8 8 f f . . . . 
+        . f 8 1 1 8 8 1 1 8 f 8 f . . . 
+        . f 8 9 1 8 8 9 1 8 f 8 8 f . . 
+        . f 8 8 8 8 8 8 8 8 f 8 8 f . . 
+        . f 8 8 f 8 8 f 8 8 f 8 8 8 f . 
+        . f 8 8 8 f f 8 8 8 f 8 8 8 f . 
+        . . f 8 8 8 8 8 8 f f 8 8 8 f . 
+        . . . f f f f f f . . f 8 8 f . 
+        . . . . . f f . . . . . f f . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . f f f f . . . . . . . . 
+        . . . f f 8 8 f f . . . . . . . 
+        . . f 8 8 8 8 8 8 f . . . . . . 
+        . f 8 8 8 8 8 8 8 8 f f f . . . 
+        . f 8 1 1 8 8 1 1 8 f 8 8 f f f 
+        . f 8 9 1 8 8 9 1 8 f 8 8 8 8 f 
+        . f 8 8 8 8 8 8 8 8 f 8 8 8 8 f 
+        . f 8 8 f 8 8 f 8 8 f f f 8 8 f 
+        . f 8 8 8 f f 8 8 8 f . . f 8 f 
+        . . f 8 8 8 8 8 8 f f . . . f f 
+        . . . f f f f f f . . . . . . . 
+        . . . . . f f . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . f f f f . . . . . . . . 
+        . . . f f 8 8 f f . . . . . f . 
+        . . f 8 8 8 8 8 8 f . . . f 8 f 
+        . f 8 8 8 8 8 8 8 8 f f f 8 8 f 
+        . f 8 1 1 8 8 1 1 8 f f 8 8 8 f 
+        . f 8 9 1 8 8 9 1 8 f 8 8 8 8 f 
+        . f 8 8 8 8 8 8 8 8 f 8 8 8 8 f 
+        . f 8 8 f 8 8 f 8 8 f f f f f . 
+        . f 8 8 8 f f 8 8 8 f . . . . . 
+        . . f 8 8 8 8 8 8 f f . . . . . 
+        . . . f f f f f f . . . . . . . 
+        . . . . . f f . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . f f f f . . . . . . . . 
+        . . . f f 8 8 f f . . . . . . . 
+        . . f 8 8 8 8 8 8 f . . . . . . 
+        . f 8 8 8 8 8 8 8 8 f f f . . . 
+        . f 8 1 1 8 8 1 1 8 f 8 8 f f f 
+        . f 8 9 1 8 8 9 1 8 f 8 8 8 8 f 
+        . f 8 8 8 8 8 8 8 8 f 8 8 8 8 f 
+        . f 8 8 f 8 8 f 8 8 f f f 8 8 f 
+        . f 8 8 8 f f 8 8 8 f . . f 8 f 
+        . . f 8 8 8 8 8 8 f f . . . f f 
+        . . . f f f f f f . . . . . . . 
+        . . . . . f f . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . f f f f . . . . . . . . 
+        . . . f f 8 8 f f . . . . . . . 
+        . . f 8 8 8 8 8 8 f . . . . . . 
+        . f 8 8 8 8 8 8 8 8 f f . . . . 
+        . f 8 1 1 8 8 1 1 8 f 8 f . . . 
+        . f 8 9 1 8 8 9 1 8 f 8 8 f . . 
+        . f 8 8 8 8 8 8 8 8 f 8 8 f . . 
+        . f 8 8 f 8 8 f 8 8 f 8 8 8 f . 
+        . f 8 8 8 f f 8 8 8 f 8 8 8 f . 
+        . . f 8 8 8 8 8 8 f f 8 8 8 f . 
+        . . . f f f f f f . . f 8 8 f . 
+        . . . . . f f . . . . . f f . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . f f f f . . . . . . 
+        . . . . . f f 8 8 f f . . . . . 
+        . . . . f 8 8 8 8 8 8 f . . . . 
+        f f f f 8 8 8 8 8 8 8 8 f f f f 
+        f 8 8 f 8 1 1 8 8 1 1 8 f 8 8 f 
+        f 8 8 f 8 1 9 8 8 9 1 8 f 8 8 f 
+        f 8 8 f 8 8 8 8 8 8 8 8 f 8 8 f 
+        f 8 8 f 8 8 f 8 8 f 8 8 f 8 8 f 
+        f 8 f f 8 8 8 f f 8 8 8 f f 8 f 
+        f f . . f 8 8 8 8 8 8 f . . f f 
+        f . . . . f f f f f f . . . . f 
+        . . . . . . . f f . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `],
+    500,
+    false
+    )
+    if (info.life() < 4) {
+        LostSoul.setImage(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . f f f f . . . . . . 
+            . . . . . f f 8 8 f f . . . . . 
+            . . . . f 8 8 8 8 8 8 f . . . . 
+            . . . f 8 8 8 8 8 8 8 8 f . . . 
+            . . . f 8 f f 8 8 f f 8 f . . . 
+            . . . f 8 f 9 8 8 9 f 8 f . . . 
+            . . . f 8 8 8 8 8 8 8 8 f . . . 
+            . . . f 8 8 8 f f 8 8 8 f . . . 
+            . . . f 8 8 f 8 8 f 8 8 f . . . 
+            . . . . f 8 8 8 8 8 8 f . . . . 
+            . . . . . f f f f f f . . . . . 
+            . . . . . . . f f . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `)
+    }
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
+    sprites.destroy(LostSoul)
+    game.gameOver(false)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`fire1`, function (sprite, location) {
     sprites.destroy(LostSoul)
     game.gameOver(false)
 })
@@ -310,7 +497,133 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`TentaclesOfDoom`, function (s
     sprites.destroy(LostSoul)
     game.gameOver(false)
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile16`, function (sprite, location) {
+    sprites.destroy(LostSoul)
+    game.gameOver(false)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile20`, function (sprite, location) {
+    tiles.setCurrentTilemap(tilemap`level4`)
+    tiles.placeOnTile(LostSoul, tiles.getTileLocation(3, 46))
+})
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    animation.runImageAnimation(
+    LostSoul,
+    [img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . f f f f . . . . 
+        . . . . . . . f f 8 8 f f . . . 
+        . . . . . . f 8 8 8 8 8 8 f . . 
+        . . . . f f 8 8 8 8 8 8 8 8 f . 
+        . . . f 8 f 8 1 1 8 8 1 1 8 f . 
+        . . f 8 8 f 8 1 9 8 8 1 9 8 f . 
+        . . f 8 8 f 8 8 8 8 8 8 8 8 f . 
+        . f 8 8 8 f 8 8 f 8 8 f 8 8 f . 
+        . f 8 8 8 f 8 8 8 f f 8 8 8 f . 
+        . f 8 8 8 f f 8 8 8 8 8 8 f . . 
+        . f 8 8 f . . f f f f f f . . . 
+        . . f f . . . . . f f . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . f f f f . . . . 
+        . . . . . . . f f 8 8 f f . . . 
+        . . . . . . f 8 8 8 8 8 8 f . . 
+        . . . f f f 8 8 8 8 8 8 8 8 f . 
+        f f f 8 8 f 8 1 1 8 8 1 1 8 f . 
+        f 8 8 8 8 f 8 1 9 8 8 1 9 8 f . 
+        f 8 8 8 8 f 8 8 8 8 8 8 8 8 f . 
+        f 8 8 f f f 8 8 f 8 8 f 8 8 f . 
+        f 8 f . . f 8 8 8 f f 8 8 8 f . 
+        f f . . . f f 8 8 8 8 8 8 f . . 
+        . . . . . . . f f f f f f . . . 
+        . . . . . . . . . f f . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . f f f f . . . . 
+        . f . . . . . f f 8 8 f f . . . 
+        f 8 f . . . f 8 8 8 8 8 8 f . . 
+        f 8 8 f f f 8 8 8 8 8 8 8 8 f . 
+        f 8 8 8 f f 8 1 1 8 8 1 1 8 f . 
+        f 8 8 8 8 f 8 1 9 8 8 1 9 8 f . 
+        f 8 8 8 8 f 8 8 8 8 8 8 8 8 f . 
+        . f f f f f 8 8 f 8 8 f 8 8 f . 
+        . . . . . f 8 8 8 f f 8 8 8 f . 
+        . . . . . f f 8 8 8 8 8 8 f . . 
+        . . . . . . . f f f f f f . . . 
+        . . . . . . . . . f f . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . f f f f . . . . 
+        . . . . . . . f f 8 8 f f . . . 
+        . . . . . . f 8 8 8 8 8 8 f . . 
+        . . . f f f 8 8 8 8 8 8 8 8 f . 
+        f f f 8 8 f 8 1 1 8 8 1 1 8 f . 
+        f 8 8 8 8 f 8 1 9 8 8 1 9 8 f . 
+        f 8 8 8 8 f 8 8 8 8 8 8 8 8 f . 
+        f 8 8 f f f 8 8 f 8 8 f 8 8 f . 
+        f 8 f . . f 8 8 8 f f 8 8 8 f . 
+        f f . . . f f 8 8 8 8 8 8 f . . 
+        . . . . . . . f f f f f f . . . 
+        . . . . . . . . . f f . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . f f f f . . . . 
+        . . . . . . . f f 8 8 f f . . . 
+        . . . . . . f 8 8 8 8 8 8 f . . 
+        . . . . f f 8 8 8 8 8 8 8 8 f . 
+        . . . f 8 f 8 1 1 8 8 1 1 8 f . 
+        . . f 8 8 f 8 1 9 8 8 1 9 8 f . 
+        . . f 8 8 f 8 8 8 8 8 8 8 8 f . 
+        . f 8 8 8 f 8 8 f 8 8 f 8 8 f . 
+        . f 8 8 8 f 8 8 8 f f 8 8 8 f . 
+        . f 8 8 8 f f 8 8 8 8 8 8 f . . 
+        . f 8 8 f . . f f f f f f . . . 
+        . . f f . . . . . f f . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . f f f f . . . . . . 
+        . . . . . f f 8 8 f f . . . . . 
+        . . . . f 8 8 8 8 8 8 f . . . . 
+        f f f f 8 8 8 8 8 8 8 8 f f f f 
+        f 8 8 f 8 1 1 8 8 1 1 8 f 8 8 f 
+        f 8 8 f 8 1 9 8 8 9 1 8 f 8 8 f 
+        f 8 8 f 8 8 8 8 8 8 8 8 f 8 8 f 
+        f 8 8 f 8 8 f 8 8 f 8 8 f 8 8 f 
+        f 8 f f 8 8 8 f f 8 8 8 f f 8 f 
+        f f . . f 8 8 8 8 8 8 f . . f f 
+        f . . . . f f f f f f . . . . f 
+        . . . . . . . f f . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `],
+    500,
+    false
+    )
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile17`, function (sprite, location) {
+    sprites.destroy(LostSoul)
+    game.gameOver(false)
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`hole black`, function (sprite, location) {
+    sprites.destroy(LostSoul)
+    game.gameOver(false)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`fire2`, function (sprite, location) {
     sprites.destroy(LostSoul)
     game.gameOver(false)
 })
@@ -326,16 +639,73 @@ info.onLifeZero(function () {
     game.gameOver(false)
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
-    sprites.destroy(otherSprite, effects.ashes, 500)
+    sprites.destroy(otherSprite, effects.fire, 500)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     LostSoul.startEffect(effects.halo, 1250)
     if (isInvincible == false) {
         info.changeLifeBy(-1)
+        music.play(music.melodyPlayable(music.zapped), music.PlaybackMode.UntilDone)
         isInvincible = true
+        LostSoul.setImage(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . f f f f . . . . . . 
+            . . . . . f f 8 8 f f . . . . . 
+            . . . . f 8 8 8 8 8 8 f . . . . 
+            f f f f 8 f 8 8 8 8 f 8 f f f f 
+            f 8 8 f 8 8 f 8 8 f 8 8 f 8 8 f 
+            f 8 8 f 8 f 8 8 8 8 f 8 f 8 8 f 
+            f 8 8 f 8 8 8 8 8 8 8 8 f 8 8 f 
+            f 8 8 f 8 8 8 f f 8 8 8 f 8 8 f 
+            f 8 f f 8 8 f 8 8 f 8 8 f f 8 f 
+            f f . f f 8 8 8 8 8 8 f f . f f 
+            f . . . f f f f f f f f . . . f 
+            . . . . . f f f f f f . . . . . 
+            . . . . . . . f f . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `)
         timer.after(1250, function () {
             isInvincible = false
+            LostSoul.setImage(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . f f f f . . . . . . 
+                . . . . . f f 8 8 f f . . . . . 
+                . . . . f 8 8 8 8 8 8 f . . . . 
+                f f f f 8 8 8 8 8 8 8 8 f f f f 
+                f 8 8 f 8 1 1 8 8 1 1 8 f 8 8 f 
+                f 8 8 f 8 1 9 8 8 9 1 8 f 8 8 f 
+                f 8 8 f 8 8 8 8 8 8 8 8 f 8 8 f 
+                f 8 8 f 8 8 f 8 8 f 8 8 f 8 8 f 
+                f 8 f f 8 8 8 f f 8 8 8 f f 8 f 
+                f f . . f 8 8 8 8 8 8 f . . f f 
+                f . . . . f f f f f f . . . . f 
+                . . . . . . . f f . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `)
         })
+    }
+    if (info.life() < 4) {
+        LostSoul.setImage(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . f f f f . . . . . . 
+            . . . . . f f 8 8 f f . . . . . 
+            . . . . f 8 8 8 8 8 8 f . . . . 
+            . . . f 8 8 8 8 8 8 8 8 f . . . 
+            . . . f 8 f f 8 8 f f 8 f . . . 
+            . . . f 8 f 9 8 8 9 f 8 f . . . 
+            . . . f 8 8 8 8 8 8 8 8 f . . . 
+            . . . f 8 8 8 f f 8 8 8 f . . . 
+            . . . f 8 8 f 8 8 f 8 8 f . . . 
+            . . . . f 8 8 8 8 8 8 f . . . . 
+            . . . . . f f f f f f . . . . . 
+            . . . . . . . f f . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `)
     }
 })
 let projectile: Sprite = null
@@ -470,21 +840,21 @@ LostSoul = sprites.create(img`
     . . . . . . f f f f . . . . . . 
     . . . . . f f 8 8 f f . . . . . 
     . . . . f 8 8 8 8 8 8 f . . . . 
-    . . . f 8 8 8 8 8 8 8 8 f . . . 
-    . . . f 8 1 1 8 8 1 1 8 f . . . 
-    . . . f 8 1 9 8 8 9 1 8 f . . . 
-    . . . f 8 8 8 8 8 8 8 8 f . . . 
-    . . . f 8 8 8 f f 8 8 8 f . . . 
-    . . . f 8 8 f 8 8 f 8 8 f . . . 
-    . . . . f 8 8 8 8 8 8 f . . . . 
-    . . . . . f f f f f f . . . . . 
+    f f f f 8 8 8 8 8 8 8 8 f f f f 
+    f 8 8 f 8 1 1 8 8 1 1 8 f 8 8 f 
+    f 8 8 f 8 1 9 8 8 9 1 8 f 8 8 f 
+    f 8 8 f 8 8 8 8 8 8 8 8 f 8 8 f 
+    f 8 8 f 8 8 f 8 8 f 8 8 f 8 8 f 
+    f 8 f f 8 8 8 f f 8 8 8 f f 8 f 
+    f f . . f 8 8 8 8 8 8 f . . f f 
+    f . . . . f f f f f f . . . . f 
     . . . . . . . f f . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.Player)
 controller.moveSprite(LostSoul, 100, 0)
 info.setLife(5)
-LostSoul.ay = 400
+LostSoul.ay = 395
 LostSoul.setVelocity(0, 90)
 scene.cameraFollowSprite(LostSoul)
 isInvincible = false
@@ -644,6 +1014,7 @@ mySprite.follow(LostSoul, 50)
 gleep_zorp.follow(LostSoul, 50)
 explode.follow(LostSoul, 50)
 rizz.follow(LostSoul, 50)
+music.play(music.createSong(hex`0078000408040700001c00010a006400f401640000040000000000000000000000000005000004120000000400012a04000c00012710001400012402001c000c960064006d019001000478002c010000640032000000000a0600051d0024002800012c28002c00012c2c0030000325292c30003c0004191d202403001c0001dc00690000045e01000400000000000000000000056400010400031e0050005400012454005800012458005c0001245c006000012060006c00011b05001c000f0a006400f4010a0000040000000000000000000000000000000002490004000800031d20240c00100001191000140003191d2014001800011918001c0001193c004c00042425292c60007000011970007400011974007800011978007c0001197c008000011907001c00020a006400f401640000040000000000000000000000000000000003060020003800011908001c000e050046006603320000040a002d0000006400140001320002010002120050005400011e54005800011e58005c00011e09010e02026400000403780000040a000301000000640001c80000040100000000640001640000040100000000fa0004af00000401c80000040a00019600000414000501006400140005010000002c0104dc00000401fa0000040a0001c8000004140005d0076400140005d0070000c800029001f40105c201f4010a0005900114001400039001000005c201f4010500058403050032000584030000fa00049001000005c201f4010500058403c80032000584030500640005840300009001049001000005c201f4010500058403c80064000584030500c8000584030000f40105ac0d000404a00f00000a0004ac0d2003010004a00f0000280004ac0d9001010004a00f0000280002d00700040408070f0064000408070000c80003c800c8000e7d00c80019000e64000f0032000e78000000fa00032c01c8000ee100c80019000ec8000f0032000edc000000fa0003f401c8000ea901c80019000e90010f0032000ea4010000fa0001c8000004014b000000c800012c01000401c8000000c8000190010004012c010000c80002c800000404c8000f0064000496000000c80002c2010004045e010f006400042c010000640002c409000404c4096400960004f6090000f40102b80b000404b80b64002c0104f40b0000f401022003000004200300040a000420030000ea01029001000004900100040a000490010000900102d007000410d0076400960010d0070000c800680000000100010b0400050002040b0800090002040b0c000d000300040b1000110002000b14001500040004080b18001900040004060b1c001d00040406080b20002100010b4800490001014c004d0001015000510001015400550001015800590001015c005d000101`), music.PlaybackMode.LoopingInBackground)
 forever(function () {
     enemy3.setVelocity(50, 0)
     pause(1000)
